@@ -202,22 +202,26 @@ ProcessX/
 │       ├── MemoryManagement.java       # [PRODUCTION] Memory allocation & compaction engine
 │       ├── DiskScheduling.java         # [PRODUCTION] Disk scheduling & audit logging engine
 │       │
-│       ├── cpu/                        # Sprint 1: CPU Scheduling
+│       ├── cpu/                        #
+Func 1: CPU Scheduling
 │       │   ├── CpuRedTest.java         # RED: JUnit 5 test suite
 │       │   ├── CpuGreenTest.java       # GREEN: Minimal FCFS/SJF implementation
 │       │   └── CpuRefactorTest.java    # REFACTOR: Round Robin & Priority optimization
 │       │
-│       ├── memory/                     # Sprint 2: Memory Management
+│       ├── memory/                     #
+Func 2: Memory Management
 │       │   ├── MemoryRedTest.java      # RED: JUnit 5 test suite
 │       │   ├── MemoryGreenTest.java    # GREEN: Dynamic partition allocation
 │       │   └── MemoryRefactorTest.java # REFACTOR: Coalescing & Compaction
 │       │
-│       ├── sync/                       # Sprint 3: Synchronization
+│       ├── sync/                       #
+Func 3: Synchronization
 │       │   ├── SyncRedTest.java        # RED: JUnit 5 test suite
 │       │   ├── SyncGreenTest.java      # GREEN: Mutual exclusion thread safety
 │       │   └── SyncRefactorTest.java   # REFACTOR: Ascending lock ordering (deadlock-free)
 │       │
-│       └── disk/                       # Sprint 4: Disk Scheduling
+│       └── disk/                       #
+Func 4: Disk Scheduling
 │           ├── DiskRedTest.java        # RED: JUnit 5 test suite
 │           ├── DiskGreenTest.java      # GREEN: SSTF seek minimization
 │           └── DiskRefactorTest.java   # REFACTOR: LOOK & C-LOOK elevator algorithms
@@ -226,99 +230,3 @@ ProcessX/
 
 ---
 
-## 🔄 Agile TDD Matrix & Test Coverage
-
-| Sprint | Subsystem | RED Phase (JUnit 5 Test File) | GREEN Phase (Working Code) | REFACTOR Phase (Clean Optimization) |
-|---|---|---|---|---|
-| **Sprint 1** | **CPU Scheduling** | `CpuRedTest.java`<br>• `testScheduleFCFS()`<br>• `testScheduleSJFNonPreemptive()`<br>• `testScheduleRoundRobin()`<br>• `testSchedulePriority()` | `CpuGreenTest.java`<br>FCFS and non-preemptive SJF queue. | `CpuRefactorTest.java`<br>Round Robin time-slicing ($q=2$), Priority scheduling, Gantt chart. |
-| **Sprint 2** | **Memory Management** | `MemoryRedTest.java`<br>• `testAllocationExceedingCapacityFails()`<br>• `testDynamicPartitionAllocation()`<br>• `testDeallocationAndCompaction()` | `MemoryGreenTest.java`<br>Dynamic partition allocation across strategies. | `MemoryRefactorTest.java`<br>Dynamic coalescing and memory compaction (0 KB fragmentation). |
-| **Sprint 3** | **Synchronization** | `SyncRedTest.java`<br>• `testConcurrentWithdrawalConsistency()`<br>• `testThreadSafeBalancePreservation()`<br>• `testDeadlockPrevention()`<br>• `testInsufficientBalanceRejection()` | `SyncGreenTest.java`<br>Mutual exclusion monitors for 100% balance consistency. | `SyncRefactorTest.java`<br>Ascending Account ID lock ordering eliminating circular wait deadlocks. |
-| **Sprint 4** | **Disk Scheduling** | `DiskRedTest.java`<br>• `testScheduleFCFS()`<br>• `testScheduleSSTFReducesHeadMovement()`<br>• `testScheduleLOOK()`<br>• `testTransactionLoggerFileWrite()` | `DiskGreenTest.java`<br>SSTF reducing head travel from 640 to 236 tracks. | `DiskRefactorTest.java`<br>LOOK & C-LOOK elevator sweeps preventing starvation. |
-
----
-
-## 👥 GitHub Contribution & Upload Guide (3 Team Members)
-
-To make sure every team member receives full credit in GitHub commit graphs and code reviews, follow this exact upload assignment:
-
-### 👤 Member 1: You (Lead Integrator & Memory Management)
-- **Role:** Project architecture, integrated pipeline, dynamic memory allocation & compaction.
-- **Files to Upload / Commit:**
-  1. `README.md`
-  2. `EXPLAINER.md`
-  3. `run.ps1`
-  4. `run.bat`
-  5. `photos/` (all screenshot images)
-  6. `lib/junit-platform-console-standalone-1.10.2.jar`
-  7. `src/processx/Main.java`
-  8. `src/processx/MemoryManagement.java`
-  9. `src/processx/memory/MemoryRedTest.java`
-  10. `src/processx/memory/MemoryGreenTest.java`
-  11. `src/processx/memory/MemoryRefactorTest.java`
-- **Suggested Commit Message:**  
-  `feat: initialize Process X simulator, integrated pipeline and memory management module`
-
----
-
-### 👤 Member 2: Kanishk (CPU Scheduling Module)
-- **Role:** CPU core scheduling algorithms, arrival queues, and time-slicing.
-- **Files to Upload / Commit:**
-  1. `src/processx/CpuScheduler.java`
-  2. `src/processx/cpu/CpuRedTest.java`
-  3. `src/processx/cpu/CpuGreenTest.java`
-  4. `src/processx/cpu/CpuRefactorTest.java`
-- **Suggested Commit Message:**  
-  `feat(cpu): implement CPU scheduling engine and Sprint 1 RGR test suite`
-
----
-
-### 👤 Member 3: Janya (Disk Scheduling & Synchronization Modules)
-- **Role:** Disk head seek optimization, persistent logging, semaphore throttling & deadlock prevention.
-- **Files to Upload / Commit:**
-  1. `src/processx/DiskScheduling.java`
-  2. `src/processx/disk/DiskRedTest.java`
-  3. `src/processx/disk/DiskGreenTest.java`
-  4. `src/processx/disk/DiskRefactorTest.java`
-  5. `src/processx/Synchronization.java`
-  6. `src/processx/sync/SyncRedTest.java`
-  7. `src/processx/sync/SyncGreenTest.java`
-  8. `src/processx/sync/SyncRefactorTest.java`
-- **Suggested Commit Message:**  
-  `feat(sync-disk): add concurrency synchronization, deadlock avoidance, disk scheduling and RGR tests`
-
----
-
-## 🚀 Quickstart & Execution Guide
-
-### 1. Compile Everything
-```powershell
-javac -cp "bin;lib\*" -d bin (Get-ChildItem -Path src -Filter *.java -Recurse | Select-Object -ExpandProperty FullName)
-```
-
-### 2. Run All 15 JUnit Tests
-```powershell
-.\run.ps1 -Mode junit
-```
-
-### 3. Run Individual Module JUnit Tests
-```powershell
-.\run.ps1 -Mode cpu-red
-.\run.ps1 -Mode mem-red
-.\run.ps1 -Mode sync-red
-.\run.ps1 -Mode disk-red
-```
-
-### 4. Run Interactive OS Simulator
-```powershell
-.\run.ps1
-```
-
-### 5. Run Full Test Suite (TC01 - TC08)
-```powershell
-.\run.ps1 -Mode test
-```
-
----
-
-## 📖 In-Depth Documentation
-For detailed viva questions, mathematical scheduling formulas ($TAT, WT, RT, \text{throughput}$), and concurrency lock-hierarchy proofs, refer to [EXPLAINER.md](file:///c:/Users/cdeva/OneDrive/Desktop/ProcessX/EXPLAINER.md).
