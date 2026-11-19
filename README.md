@@ -183,7 +183,6 @@ By keeping the tests directly in the feature folders, Process X follows **Featur
 ```
 ProcessX/
 ├── README.md                           # Main project documentation & quickstart
-├── EXPLAINER.md                        # Complete technical viva defense & architecture guide
 ├── run.ps1                             # PowerShell one-click automation script
 ├── run.bat                             # Windows CMD runner
 ├── photos/                             # Execution screenshots
